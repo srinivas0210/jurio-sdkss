@@ -1,0 +1,13 @@
+.notification-main-div {
+    background-color: darkorange !important;
+    display: flex;
+}
+
+.notification-info-div {
+    color: black !important;
+    flex-direction: column;
+}
+
+.notification-info-sender {
+    font-weight: bold !important;
+}
