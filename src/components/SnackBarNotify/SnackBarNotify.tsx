@@ -17,7 +17,6 @@ const PositionedSnackbar: React.FunctionComponent<PositionedSnackbarProps> = ({
   notificationMessageDetails,
 }) => {
 
-  console.log(notificationMessageDetails)
   return (
     <div>
       <Snackbar
