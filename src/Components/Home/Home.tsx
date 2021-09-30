@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 // external components and constants
 import Contacts from "../Contacts/Contacts";
-import { constants, baseUrl } from "../../constants";
+import { constants, baseUrl } from "../../Constants";
 import FloatButton from "../FloatButton/FloatButton";
 import { setContacts, setCurrentUser } from "../../Store/Actions/Actions";
 
 // Models
-import State from "../../Models/state";
+import State from "../../Models/State";
 import Contact from "../../Models/Contact";
 
 // style imports

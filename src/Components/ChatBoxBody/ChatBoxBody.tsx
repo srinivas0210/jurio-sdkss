@@ -1,8 +1,8 @@
 import React from "react";
 
 // external components and constants
-import SvgProfile from "../../assets/profile";
-import { constants } from "../../constants";
+import SvgProfile from "../../Assets/Profile";
+import { constants } from "../../Constants";
 
 // Models
 import Message from "../../Models/Message";
@@ -23,7 +23,7 @@ const ChatBoxBody: React.FunctionComponent<ChatBoxBodyProps> = ({
     : [];
 
   return (
-    <div className="chat-box__body">
+    <div className="chat-box-body">
       {messages?.length ? (
         sortedMessages.map((message: Message) => {
           return (

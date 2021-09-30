@@ -5,16 +5,14 @@ import { TextField } from "@material-ui/core";
 
 import {
   setContacts,
-  setCurrentUser,
-  setCurrentConversation,
 } from "../../Store/Actions/Actions";
-import SvgProfile from "../../assets/profile";
-import { constants, baseUrl } from "../../constants";
+import SvgProfile from "../../Assets/Profile";
+import { constants, baseUrl } from "../../Constants";
 import FloatButton from "../FloatButton/FloatButton";
 
 
 // Models
-import State from "../../Models/state";
+import State from "../../Models/State";
 import Contact from "../../Models/Contact";
 
 // style imports
@@ -24,10 +22,8 @@ const CreateNewConversation = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const contacts = useSelector((state: State) => state.contacts);
-  const currentUser = useSelector((state: State) => state.currentUser);
   const currentUserId: string = localStorage.getItem("currentUserId") || '';
 
-  const [selectedUser, setSelectedUser] = useState<Contact | null>(null);
   const [title, setTitle] = useState<string>("");
   const [newGroupMembers, setNewGroupMembers] = useState<Contact[]>([]);
   const [newGroupMembersId, setNewGroupMembersId] = useState<number[]>([]);

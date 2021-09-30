@@ -5,10 +5,10 @@ import { TextField } from "@material-ui/core";
 
 // external components and constants
 import ChatBoxBody from "../ChatBoxBody/ChatBoxBody";
-import { constants, baseUrl } from "../../constants";
+import { constants, baseUrl } from "../../Constants";
 
 // / Models
-import State from "../../Models/state";
+import State from "../../Models/State";
 
 // style imports
 import "./ChatBox.css";
@@ -80,9 +80,9 @@ const ChatBox: React.FunctionComponent = () => {
 
   return (
     <div className="chat-box flex">
-      <div className="chat-box__header">{JSON.parse(currentConvoTitle)}</div>
+      <div className="chat-box-header">{JSON.parse(currentConvoTitle)}</div>
       <ChatBoxBody messages={messages} />
-      <div className="chat-box__footer flex">
+      <div className="chat-box-footer flex">
         <TextField
           className="chat-input"
           hiddenLabel

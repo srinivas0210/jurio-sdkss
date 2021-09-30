@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 
 // external components and constants
 import { ROUTES } from "./Routes";
-import Home from "./components/Home/Home";
-import GoBack from "./components/GoBack/GoBack";
-import ChatBox from "./components/ChatBox/ChatBox";
+import Home from "./Components/Home/Home";
+import GoBack from "./Components/GoBack/GoBack";
+import ChatBox from "./Components/ChatBox/ChatBox";
 import { setWebSocketData } from "./Store/Actions/Actions";
-import Conversations from "./components/Conversations/Conversations";
-import PositionedSnackbar from "./components/SnackBarNotify/SnackBarNotify";
-import CreateNewConversation from "./components/CreateNewConversation/CreateNewConversation";
+import Conversations from "./Components/Conversations/Conversations";
+import PositionedSnackbar from "./Components/SnackBarNotify/SnackBarNotify";
+import CreateNewConversation from "./Components/CreateNewConversation/CreateNewConversation";
 
 // Models
 import Notification from "./Models/Notification";

@@ -7,12 +7,12 @@ import {
   setConversations,
   setCurrentConversation,
 } from "../../Store/Actions/Actions";
-import SvgProfile from "../../assets/profile";
-import { constants, baseUrl } from "../../constants";
+import SvgProfile from "../../Assets/Profile";
+import { constants, baseUrl } from "../../Constants";
 import FloatButton from "../FloatButton/FloatButton";
 
 // Models
-import State from "../../Models/state";
+import State from "../../Models/State";
 
 // style imports
 import "./Conversations.css";
@@ -36,7 +36,6 @@ const Conversations = () => {
   }, []);
 
   const redirectToMessages = (convo: any) => {
-
     dispatch(setCurrentConversation(convo));
     localStorage.setItem("currentConvoTitle", JSON.stringify(convo.title));
     history.push(`/conversations/${convo.id}`);

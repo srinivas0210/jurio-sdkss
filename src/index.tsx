@@ -5,12 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ActionCableProvider } from "react-actioncable-provider";
-import { webSocketUrl } from "./constants";
+import { webSocketUrl } from "./Constants";
 
 // redux
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import counterReducer from "./Store/Reducers/Reducers";
+
+require('dotenv').config()
 
 const store = createStore(counterReducer);
 

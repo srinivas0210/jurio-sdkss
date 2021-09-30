@@ -1,6 +1,6 @@
 import React   from "react";
 
-import SvgProfile from "../../assets/profile";
+import SvgProfile from "../../Assets/Profile";
 import Contact from "../../Models/Contact";
 
 // style imports
