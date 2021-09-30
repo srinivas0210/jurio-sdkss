@@ -1,7 +1,7 @@
 import React   from "react";
 
-import SvgProfile from "../../assets/profile";
-import Contact from "../../Models/Contact";
+import SvgProfile from "../../assets/Profile";
+import Contact from "../../models/Contact";
 
 // style imports
 import "./Contacts.css";

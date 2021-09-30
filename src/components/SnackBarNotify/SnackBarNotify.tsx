@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
-import SvgProfile from "../../assets/profile";
+import SvgProfile from "../../assets/Profile";
 
 // Models
-import Notification from '../../Models/Notification'
+import Notification from '../../models/Notification'
 
 
 interface PositionedSnackbarProps {

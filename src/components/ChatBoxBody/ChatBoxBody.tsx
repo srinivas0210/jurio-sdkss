@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 // external components and constants
-import SvgProfile from "../../assets/profile";
+import SvgProfile from "../../assets/Profile";
 import { constants } from "../../constants";
+import { getItem } from "../../services/LocalStorage";
 
 // Models
-import Message from "../../Models/Message";
+import Message from "../../models/Message";
 
 // style imports
 import "./ChatBoxBody.css";
@@ -17,17 +18,26 @@ interface ChatBoxBodyProps {
 const ChatBoxBody: React.FunctionComponent<ChatBoxBodyProps> = ({
   messages,
 }) => {
-  const currentUserId: string = localStorage.getItem("currentUserId") || "";
+  const chatBoxBodyScrollRef = useRef<any>(null);
+  const currentUserId: string = getItem("currentUserId") || "";
+
   const sortedMessages = messages?.length
     ? messages.sort((a: any, b: any) => a.id - b.id)
     : [];
 
+  useEffect(() => {
+    if (chatBoxBodyScrollRef && chatBoxBodyScrollRef.current) {
+      chatBoxBodyScrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [sortedMessages]);
+
   return (
-    <div className="chat-box__body">
+    <div className="chat-box-body">
       {messages?.length ? (
         sortedMessages.map((message: Message) => {
           return (
             <div
+              key={message.id}
               className={`message-container ${
                 message.sender_id === JSON.parse(currentUserId)
                   ? "sender-container"
@@ -54,6 +64,7 @@ const ChatBoxBody: React.FunctionComponent<ChatBoxBodyProps> = ({
       ) : (
         <div className="no-messages flex">{constants.noMessagesText}</div>
       )}
+      <div ref={chatBoxBodyScrollRef}></div>
     </div>
   );
 };

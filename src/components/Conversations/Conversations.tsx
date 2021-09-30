@@ -6,13 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setConversations,
   setCurrentConversation,
-} from "../../Store/Actions/Actions";
-import SvgProfile from "../../assets/profile";
-import { constants, baseUrl } from "../../constants";
+} from "../../store/Actions/Actions";
+import SvgProfile from "../../assets/Profile";
+import { constants } from "../../constants";
 import FloatButton from "../FloatButton/FloatButton";
+import { getOrPostConversations } from "../../services/Conversations";
+import { setItem,getItem } from "../../services/LocalStorage";
 
 // Models
-import State from "../../Models/state";
+import State from "../../models/State";
 
 // style imports
 import "./Conversations.css";
@@ -21,7 +23,7 @@ const Conversations = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const currentUserId: string = localStorage.getItem("currentUserId") || "";
+  const currentUserId: string = getItem("currentUserId") || "";
   const currentUserConversations = useSelector(
     (state: State) => state.conversations
   );
@@ -30,15 +32,14 @@ const Conversations = () => {
     const requestOptions: any = {
       headers: { user_id: JSON.parse(currentUserId) },
     };
-    fetch(`${baseUrl}/conversations`, requestOptions)
-      .then((response) => response.json())
-      .then((convos) => dispatch(setConversations(convos)));
+    getOrPostConversations(requestOptions).then((convos) =>
+      dispatch(setConversations(convos))
+    );
   }, []);
 
   const redirectToMessages = (convo: any) => {
-
     dispatch(setCurrentConversation(convo));
-    localStorage.setItem("currentConvoTitle", JSON.stringify(convo.title));
+    setItem("currentConvoTitle", JSON.stringify(convo.title));
     history.push(`/conversations/${convo.id}`);
   };
 
@@ -73,7 +74,7 @@ const Conversations = () => {
                             ? convo.last_message[0].content
                             : "No recent Messages"}
                         </div>
-                        <div>{convo.updated_at?.slice(11,16)} </div>
+                        <div>{convo.updated_at?.slice(11, 16)} </div>
                       </div>
                     </div>
                   </div>

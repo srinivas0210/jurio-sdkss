@@ -5,10 +5,12 @@ import { TextField } from "@material-ui/core";
 
 // external components and constants
 import ChatBoxBody from "../ChatBoxBody/ChatBoxBody";
-import { constants, baseUrl } from "../../constants";
+import { constants } from "../../constants";
+import { getOrPostMessages } from "../../services/Messages";
+import { getItem } from "../../services/LocalStorage";
 
 // / Models
-import State from "../../Models/state";
+import State from "../../models/State";
 
 // style imports
 import "./ChatBox.css";
@@ -16,9 +18,9 @@ import "./ChatBox.css";
 const ChatBox: React.FunctionComponent = () => {
   const location = useLocation();
   const currentPath = location.pathname.split("/");
-  const currentUserId: string = localStorage.getItem("currentUserId") || "";
+  const currentUserId: string = getItem("currentUserId") || "";
   const currentConvoTitle: string =
-    localStorage.getItem("currentConvoTitle") || "";
+    getItem("currentConvoTitle") || "";
 
   const webSocketData = useSelector((state: State) => state.webSocketData);
 
@@ -26,7 +28,7 @@ const ChatBox: React.FunctionComponent = () => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [fetchAgain, setFetchAgain] = useState<boolean>(true);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (
       fetchAgain ||
       webSocketData.conversation_id ===
@@ -35,16 +37,13 @@ const ChatBox: React.FunctionComponent = () => {
       const requestOptions: any = {
         headers: { user_id: JSON.parse(currentUserId) },
       };
-      fetch(
-        `${baseUrl}/conversations/${
-          currentPath[currentPath.length - 1]
-        }/messages`,
+
+      getOrPostMessages(
+        currentPath[currentPath.length - 1],
         requestOptions
-      )
-        .then((response) => response.json())
-        .then((currentMessages) => {
-          if (currentMessages[0] !== messages[0]) setMessages(currentMessages);
-        });
+      ).then((currentMessages) => {
+        if (currentMessages[0] !== messages[0]) setMessages(currentMessages);
+      });
       setFetchAgain(false);
     }
   }, [fetchAgain, webSocketData]);
@@ -66,12 +65,7 @@ const ChatBox: React.FunctionComponent = () => {
         body: JSON.stringify({ content: newMessage }),
       };
 
-      fetch(
-        `${baseUrl}/conversations/${
-          currentPath[currentPath.length - 1]
-        }/messages`,
-        requestOptions
-      ).then((response) => response.json());
+      getOrPostMessages(currentPath[currentPath.length - 1], requestOptions);
 
       setTimeout(() => setFetchAgain(true), 500);
       setNewMessage("");
@@ -80,9 +74,9 @@ const ChatBox: React.FunctionComponent = () => {
 
   return (
     <div className="chat-box flex">
-      <div className="chat-box__header">{JSON.parse(currentConvoTitle)}</div>
+      <div className="chat-box-header">{JSON.parse(currentConvoTitle)}</div>
       <ChatBoxBody messages={messages} />
-      <div className="chat-box__footer flex">
+      <div className="chat-box-footer flex">
         <TextField
           className="chat-input"
           hiddenLabel

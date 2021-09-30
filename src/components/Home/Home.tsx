@@ -4,13 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 // external components and constants
 import Contacts from "../Contacts/Contacts";
-import { constants, baseUrl } from "../../constants";
+import { constants } from "../../constants";
 import FloatButton from "../FloatButton/FloatButton";
-import { setContacts, setCurrentUser } from "../../Store/Actions/Actions";
+import { setContacts, setCurrentUser } from "../../store/Actions/Actions";
+import { getContacts } from "../../services/Contacts";
+import { setItem } from "../../services/LocalStorage";
 
 // Models
-import State from "../../Models/state";
-import Contact from "../../Models/Contact";
+import State from "../../models/State";
+import Contact from "../../models/Contact";
 
 // style imports
 import "./Home.css";
@@ -23,9 +25,7 @@ const Home = () => {
   const [selectedUser, setSelectedUser] = useState<Contact | null>(null);
 
   useEffect(() => {
-    fetch(`${baseUrl}/contacts`)
-      .then((response) => response.json())
-      .then((contactsData) => dispatch(setContacts(contactsData)));
+    getContacts().then((contactsData) => dispatch(setContacts(contactsData)));
   }, []);
 
   const handleSelectedUser = (contact: Contact) => setSelectedUser(contact);
@@ -35,7 +35,7 @@ const Home = () => {
       alert(constants.errorSelectAUser);
       return;
     }
-    localStorage.setItem("currentUserId", JSON.stringify(selectedUser.id));
+    setItem("currentUserId", JSON.stringify(selectedUser.id));
     dispatch(setCurrentUser(selectedUser));
     history.push(`/conversations`);
   };

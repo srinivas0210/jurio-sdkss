@@ -1,7 +1,7 @@
-import Contact from "../../Models/Contact";
-import { CurrentUser } from "../../Models/CurrentUser";
-import { Conversation } from "../../Models/Conversation";
-import { CurrentConversation } from "../../Models/CurrentConversation";
+import Contact from "../../models/Contact";
+import { CurrentUser } from "../../models/CurrentUser";
+import { Conversation } from "../../models/Conversation";
+import { CurrentConversation } from "../../models/CurrentConversation";
 
 const setContacts = (payload: Contact[]) => {
   return {
