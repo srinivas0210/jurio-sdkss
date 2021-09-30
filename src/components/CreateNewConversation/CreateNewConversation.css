@@ -1,0 +1,95 @@
+.chat-input {
+  position: absolute;
+  position: absolute;
+  bottom: 10%;
+  width: 70%;
+  right: 5%;
+}
+
+.CreateNewConversation {
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  font-family: Roboto;
+  position: relative;
+  background-image: url(../../assets/Desktop\ Fluid\ Layout.png);
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-converstation-contacts {
+  width: 100%;
+  /* height: 100%; */
+  /* flex-direction: column; */
+  overflow: auto;
+  flex-wrap: wrap;
+}
+
+.new-converstation-header {
+  font-size: 50px;
+  padding-top: 40px;
+  margin-bottom: 40px;
+}
+
+.new-converstation-continue {
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
+  border: 1px solid black;
+  padding: 15px 45px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 0px #000000;
+  border-radius: 8px;
+}
+
+.new-converstation-continue:hover {
+  background-color: rgb(206, 193, 193);
+  cursor: pointer;
+}
+
+.CreateNewConversation .contact-item {
+  width: 22.5%;
+  height: 50px;
+  margin: 12px;
+  cursor: pointer;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.CreateNewConversation .contact-item:hover {
+  background-color: #bce3fc;
+  border-radius: 4px;
+}
+
+.avatar {
+  flex: 30%;
+}
+
+.avatar-inner-div {
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.name {
+  flex: 70%;
+  text-align: left;
+}
+
+.profile-avatar {
+  font-size: 30px !important;
+  color: white !important;
+}
+
+.highlight-user {
+  background-color: #bce3fc;
+  border-radius: 4px;
+}

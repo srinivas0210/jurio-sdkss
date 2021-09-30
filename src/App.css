@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+.MuiSnackbarContent-root {
+  background-color: white !important;
+  color: black !important;
+}
+
+.App {
+  position: relative;
+  background-image: url(./assets/Desktop\ Fluid\ Layout.png);
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+}
+
+.chevron-left-div {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  color: black !important;
+}
+.chevron-left-icon {
+  font-size: 50px !important;
+  cursor: pointer;
+}
