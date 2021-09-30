@@ -5,12 +5,12 @@ import { TextField } from "@material-ui/core";
 
 // external components and constants
 import ChatBoxBody from "../ChatBoxBody/ChatBoxBody";
-import { constants } from "../../Constants";
-import { getOrPostMessages } from "../../Services/Messages";
-import { getItem } from "../../Services/LocalStorage";
+import { constants } from "../../constants";
+import { getOrPostMessages } from "../../services/Messages";
+import { getItem } from "../../services/LocalStorage";
 
 // / Models
-import State from "../../Models/State";
+import State from "../../models/State";
 
 // style imports
 import "./ChatBox.css";

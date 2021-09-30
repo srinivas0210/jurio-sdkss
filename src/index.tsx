@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 // redux
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import counterReducer from "./Store/Reducers/Reducers";
+import counterReducer from "./store/Reducers/Reducers";
 
 const store = createStore(counterReducer);
 

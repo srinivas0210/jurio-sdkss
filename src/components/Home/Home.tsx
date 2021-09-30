@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 // external components and constants
 import Contacts from "../Contacts/Contacts";
-import { constants } from "../../Constants";
+import { constants } from "../../constants";
 import FloatButton from "../FloatButton/FloatButton";
-import { setContacts, setCurrentUser } from "../../Store/Actions/Actions";
-import { getContacts } from "../../Services/Contacts";
-import { setItem } from "../../Services/LocalStorage";
+import { setContacts, setCurrentUser } from "../../store/Actions/Actions";
+import { getContacts } from "../../services/Contacts";
+import { setItem } from "../../services/LocalStorage";
 
 // Models
-import State from "../../Models/State";
-import Contact from "../../Models/Contact";
+import State from "../../models/State";
+import Contact from "../../models/Contact";
 
 // style imports
 import "./Home.css";

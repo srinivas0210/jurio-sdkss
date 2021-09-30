@@ -3,17 +3,17 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { TextField } from "@material-ui/core";
 
-import { setContacts } from "../../Store/Actions/Actions";
-import SvgProfile from "../../Assets/Profile";
-import { constants } from "../../Constants";
+import { setContacts } from "../../store/Actions/Actions";
+import SvgProfile from "../../assets/Profile";
+import { constants } from "../../constants";
 import FloatButton from "../FloatButton/FloatButton";
-import { getContacts } from "../../Services/Contacts";
-import { getOrPostConversations } from "../../Services/Conversations";
-import { setItem, getItem } from "../../Services/LocalStorage";
+import { getContacts } from "../../services/Contacts";
+import { getOrPostConversations } from "../../services/Conversations";
+import { setItem, getItem } from "../../services/LocalStorage";
 
 // Models
-import State from "../../Models/State";
-import Contact from "../../Models/Contact";
+import State from "../../models/State";
+import Contact from "../../models/Contact";
 
 // style imports
 import "./CreateNewConversation.css";

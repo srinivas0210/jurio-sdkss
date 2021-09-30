@@ -2,21 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import ActionCable from "actioncable";
 import { useDispatch } from "react-redux";
-import { webSocketUrl } from "./Constants";
+import { webSocketUrl } from "./constants";
 
 // external components and constants
 import { ROUTES } from "./Routes";
-import Home from "./Components/Home/Home";
-import GoBack from "./Components/GoBack/GoBack";
-import ChatBox from "./Components/ChatBox/ChatBox";
-import { setWebSocketData } from "./Store/Actions/Actions";
-import Conversations from "./Components/Conversations/Conversations";
-import PositionedSnackbar from "./Components/SnackBarNotify/SnackBarNotify";
-import CreateNewConversation from "./Components/CreateNewConversation/CreateNewConversation";
-import { getItem } from "./Services/LocalStorage";
+import Home from "./components/Home/Home";
+import GoBack from "./components/GoBack/GoBack";
+import ChatBox from "./components/ChatBox/ChatBox";
+import { setWebSocketData } from "./store/Actions/Actions";
+import Conversations from "./components/Conversations/Conversations";
+import PositionedSnackbar from "./components/SnackBarNotify/SnackBarNotify";
+import CreateNewConversation from "./components/CreateNewConversation/CreateNewConversation";
+import { getItem } from "./services/LocalStorage";
 
 // Models
-import Notification from "./Models/Notification";
+import Notification from "./models/Notification";
 
 // style imports
 import "./App.css";

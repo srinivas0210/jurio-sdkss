@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
 
 // external components and constants
-import SvgProfile from "../../Assets/Profile";
-import { constants } from "../../Constants";
-import { getItem } from "../../Services/LocalStorage";
+import SvgProfile from "../../assets/Profile";
+import { constants } from "../../constants";
+import { getItem } from "../../services/LocalStorage";
 
 // Models
-import Message from "../../Models/Message";
+import Message from "../../models/Message";
 
 // style imports
 import "./ChatBoxBody.css";

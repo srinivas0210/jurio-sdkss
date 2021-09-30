@@ -6,15 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setConversations,
   setCurrentConversation,
-} from "../../Store/Actions/Actions";
-import SvgProfile from "../../Assets/Profile";
-import { constants } from "../../Constants";
+} from "../../store/Actions/Actions";
+import SvgProfile from "../../assets/Profile";
+import { constants } from "../../constants";
 import FloatButton from "../FloatButton/FloatButton";
-import { getOrPostConversations } from "../../Services/Conversations";
-import { setItem,getItem } from "../../Services/LocalStorage";
+import { getOrPostConversations } from "../../services/Conversations";
+import { setItem,getItem } from "../../services/LocalStorage";
 
 // Models
-import State from "../../Models/State";
+import State from "../../models/State";
 
 // style imports
 import "./Conversations.css";
