@@ -13,6 +13,7 @@ import { setWebSocketData } from "./Store/Actions/Actions";
 import Conversations from "./Components/Conversations/Conversations";
 import PositionedSnackbar from "./Components/SnackBarNotify/SnackBarNotify";
 import CreateNewConversation from "./Components/CreateNewConversation/CreateNewConversation";
+import { getItem } from "./Services/LocalStorage";
 
 // Models
 import Notification from "./Models/Notification";
@@ -25,7 +26,7 @@ const cable = ActionCable.createConsumer(`${webSocketUrl}`);
 const App: React.FunctionComponent = () => {
   const dispatch = useDispatch();
 
-  const currentUserId: string = localStorage.getItem("currentUserId") || "";
+  const currentUserId: string = getItem("currentUserId") || "";
 
   const [notify, setNotify] = useState<boolean>(false);
   const [notificationMessageDetails, setNotificationMessageDetails] = useState<Notification | null>(null);

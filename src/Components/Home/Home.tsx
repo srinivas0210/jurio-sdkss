@@ -8,6 +8,7 @@ import { constants } from "../../Constants";
 import FloatButton from "../FloatButton/FloatButton";
 import { setContacts, setCurrentUser } from "../../Store/Actions/Actions";
 import { getContacts } from "../../Services/Contacts";
+import { setItem } from "../../Services/LocalStorage";
 
 // Models
 import State from "../../Models/State";
@@ -34,7 +35,7 @@ const Home = () => {
       alert(constants.errorSelectAUser);
       return;
     }
-    localStorage.setItem("currentUserId", JSON.stringify(selectedUser.id));
+    setItem("currentUserId", JSON.stringify(selectedUser.id));
     dispatch(setCurrentUser(selectedUser));
     history.push(`/conversations`);
   };

@@ -9,6 +9,7 @@ import { constants } from "../../Constants";
 import FloatButton from "../FloatButton/FloatButton";
 import { getContacts } from "../../Services/Contacts";
 import { getOrPostConversations } from "../../Services/Conversations";
+import { setItem, getItem } from "../../Services/LocalStorage";
 
 // Models
 import State from "../../Models/State";
@@ -21,7 +22,7 @@ const CreateNewConversation = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const contacts = useSelector((state: State) => state.contacts);
-  const currentUserId: string = localStorage.getItem("currentUserId") || "";
+  const currentUserId: string = getItem("currentUserId") || "";
 
   const [title, setTitle] = useState<string>("");
   const [newGroupMembers, setNewGroupMembers] = useState<Contact[]>([]);
@@ -66,7 +67,7 @@ const CreateNewConversation = () => {
     };
 
     getOrPostConversations(requestOptions).then((data) => {
-      localStorage.setItem("currentConvoTitle", JSON.stringify(title));
+      setItem("currentConvoTitle", JSON.stringify(title));
       history.push(`/conversations/${data.id}`);
     });
   };

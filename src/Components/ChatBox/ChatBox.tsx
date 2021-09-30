@@ -7,6 +7,7 @@ import { TextField } from "@material-ui/core";
 import ChatBoxBody from "../ChatBoxBody/ChatBoxBody";
 import { constants } from "../../Constants";
 import { getOrPostMessages } from "../../Services/Messages";
+import { getItem } from "../../Services/LocalStorage";
 
 // / Models
 import State from "../../Models/State";
@@ -17,9 +18,9 @@ import "./ChatBox.css";
 const ChatBox: React.FunctionComponent = () => {
   const location = useLocation();
   const currentPath = location.pathname.split("/");
-  const currentUserId: string = localStorage.getItem("currentUserId") || "";
+  const currentUserId: string = getItem("currentUserId") || "";
   const currentConvoTitle: string =
-    localStorage.getItem("currentConvoTitle") || "";
+    getItem("currentConvoTitle") || "";
 
   const webSocketData = useSelector((state: State) => state.webSocketData);
 

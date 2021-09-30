@@ -11,6 +11,7 @@ import SvgProfile from "../../Assets/Profile";
 import { constants } from "../../Constants";
 import FloatButton from "../FloatButton/FloatButton";
 import { getOrPostConversations } from "../../Services/Conversations";
+import { setItem,getItem } from "../../Services/LocalStorage";
 
 // Models
 import State from "../../Models/State";
@@ -22,7 +23,7 @@ const Conversations = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const currentUserId: string = localStorage.getItem("currentUserId") || "";
+  const currentUserId: string = getItem("currentUserId") || "";
   const currentUserConversations = useSelector(
     (state: State) => state.conversations
   );
@@ -38,7 +39,7 @@ const Conversations = () => {
 
   const redirectToMessages = (convo: any) => {
     dispatch(setCurrentConversation(convo));
-    localStorage.setItem("currentConvoTitle", JSON.stringify(convo.title));
+    setItem("currentConvoTitle", JSON.stringify(convo.title));
     history.push(`/conversations/${convo.id}`);
   };
 
