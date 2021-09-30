@@ -8,8 +8,9 @@ import {
   setCurrentConversation,
 } from "../../Store/Actions/Actions";
 import SvgProfile from "../../Assets/Profile";
-import { constants, baseUrl } from "../../Constants";
+import { constants } from "../../Constants";
 import FloatButton from "../FloatButton/FloatButton";
+import { getOrPostConversations } from "../../Services/Conversations";
 
 // Models
 import State from "../../Models/State";
@@ -30,9 +31,9 @@ const Conversations = () => {
     const requestOptions: any = {
       headers: { user_id: JSON.parse(currentUserId) },
     };
-    fetch(`${baseUrl}/conversations`, requestOptions)
-      .then((response) => response.json())
-      .then((convos) => dispatch(setConversations(convos)));
+    getOrPostConversations(requestOptions).then((convos) =>
+      dispatch(setConversations(convos))
+    );
   }, []);
 
   const redirectToMessages = (convo: any) => {
@@ -72,7 +73,7 @@ const Conversations = () => {
                             ? convo.last_message[0].content
                             : "No recent Messages"}
                         </div>
-                        <div>{convo.updated_at?.slice(11,16)} </div>
+                        <div>{convo.updated_at?.slice(11, 16)} </div>
                       </div>
                     </div>
                   </div>

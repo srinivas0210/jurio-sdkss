@@ -12,6 +12,6 @@ export const constants = {
   errorMessageNeeded: "message required",
 };
 
-export const baseUrl = "http://34.122.252.114:3000";
+export const baseUrl = process.env.REACT_APP_APP_URL
 
-export const webSocketUrl = "ws://34.122.252.114:3000/cable";
+export const webSocketUrl = process.env.REACT_APP_WS_URL

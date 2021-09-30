@@ -5,7 +5,8 @@ import { TextField } from "@material-ui/core";
 
 // external components and constants
 import ChatBoxBody from "../ChatBoxBody/ChatBoxBody";
-import { constants, baseUrl } from "../../Constants";
+import { constants } from "../../Constants";
+import { getOrPostMessages } from "../../Services/Messages";
 
 // / Models
 import State from "../../Models/State";
@@ -26,7 +27,7 @@ const ChatBox: React.FunctionComponent = () => {
   const [newMessage, setNewMessage] = useState<string>("");
   const [fetchAgain, setFetchAgain] = useState<boolean>(true);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (
       fetchAgain ||
       webSocketData.conversation_id ===
@@ -35,16 +36,13 @@ const ChatBox: React.FunctionComponent = () => {
       const requestOptions: any = {
         headers: { user_id: JSON.parse(currentUserId) },
       };
-      fetch(
-        `${baseUrl}/conversations/${
-          currentPath[currentPath.length - 1]
-        }/messages`,
+
+      getOrPostMessages(
+        currentPath[currentPath.length - 1],
         requestOptions
-      )
-        .then((response) => response.json())
-        .then((currentMessages) => {
-          if (currentMessages[0] !== messages[0]) setMessages(currentMessages);
-        });
+      ).then((currentMessages) => {
+        if (currentMessages[0] !== messages[0]) setMessages(currentMessages);
+      });
       setFetchAgain(false);
     }
   }, [fetchAgain, webSocketData]);
@@ -66,12 +64,7 @@ const ChatBox: React.FunctionComponent = () => {
         body: JSON.stringify({ content: newMessage }),
       };
 
-      fetch(
-        `${baseUrl}/conversations/${
-          currentPath[currentPath.length - 1]
-        }/messages`,
-        requestOptions
-      ).then((response) => response.json());
+      getOrPostMessages(currentPath[currentPath.length - 1], requestOptions);
 
       setTimeout(() => setFetchAgain(true), 500);
       setNewMessage("");

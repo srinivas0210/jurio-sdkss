@@ -3,13 +3,12 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { TextField } from "@material-ui/core";
 
-import {
-  setContacts,
-} from "../../Store/Actions/Actions";
+import { setContacts } from "../../Store/Actions/Actions";
 import SvgProfile from "../../Assets/Profile";
-import { constants, baseUrl } from "../../Constants";
+import { constants } from "../../Constants";
 import FloatButton from "../FloatButton/FloatButton";
-
+import { getContacts } from "../../Services/Contacts";
+import { getOrPostConversations } from "../../Services/Conversations";
 
 // Models
 import State from "../../Models/State";
@@ -22,7 +21,7 @@ const CreateNewConversation = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const contacts = useSelector((state: State) => state.contacts);
-  const currentUserId: string = localStorage.getItem("currentUserId") || '';
+  const currentUserId: string = localStorage.getItem("currentUserId") || "";
 
   const [title, setTitle] = useState<string>("");
   const [newGroupMembers, setNewGroupMembers] = useState<Contact[]>([]);
@@ -30,9 +29,7 @@ const CreateNewConversation = () => {
 
   useEffect(() => {
     if (!contacts.length) {
-      fetch(`${baseUrl}/contacts`)
-        .then((response) => response.json())
-        .then((contactsData) => dispatch(setContacts(contactsData)));
+      getContacts().then((contactsData) => dispatch(setContacts(contactsData)));
     }
   }, [contacts]);
 
@@ -68,12 +65,10 @@ const CreateNewConversation = () => {
       body: JSON.stringify({ title, contact_ids: newGroupMembersId }),
     };
 
-    fetch(`${baseUrl}/conversations`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem('currentConvoTitle',JSON.stringify(title))
-        history.push(`/conversations/${data.id}`);
-      });
+    getOrPostConversations(requestOptions).then((data) => {
+      localStorage.setItem("currentConvoTitle", JSON.stringify(title));
+      history.push(`/conversations/${data.id}`);
+    });
   };
 
   return (
@@ -84,7 +79,9 @@ const CreateNewConversation = () => {
       <div className="new-converstation-contacts flex">
         {contacts.length
           ? contacts
-              .filter((contact: Contact) => contact.id !== JSON.parse(currentUserId))
+              .filter(
+                (contact: Contact) => contact.id !== JSON.parse(currentUserId)
+              )
               .map((contact: Contact) => {
                 return (
                   <div

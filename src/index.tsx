@@ -12,8 +12,6 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import counterReducer from "./Store/Reducers/Reducers";
 
-require('dotenv').config()
-
 const store = createStore(counterReducer);
 
 ReactDOM.render(

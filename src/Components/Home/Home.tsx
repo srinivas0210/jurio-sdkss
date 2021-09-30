@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 // external components and constants
 import Contacts from "../Contacts/Contacts";
-import { constants, baseUrl } from "../../Constants";
+import { constants } from "../../Constants";
 import FloatButton from "../FloatButton/FloatButton";
 import { setContacts, setCurrentUser } from "../../Store/Actions/Actions";
+import { getContacts } from "../../Services/Contacts";
 
 // Models
 import State from "../../Models/State";
@@ -23,9 +24,7 @@ const Home = () => {
   const [selectedUser, setSelectedUser] = useState<Contact | null>(null);
 
   useEffect(() => {
-    fetch(`${baseUrl}/contacts`)
-      .then((response) => response.json())
-      .then((contactsData) => dispatch(setContacts(contactsData)));
+    getContacts().then((contactsData) => dispatch(setContacts(contactsData)));
   }, []);
 
   const handleSelectedUser = (contact: Contact) => setSelectedUser(contact);
