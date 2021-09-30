@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import { ActionCable } from "react-actioncable-provider";
+import ActionCable from "actioncable";
 import { useDispatch } from "react-redux";
+import { webSocketUrl } from "./Constants";
 
 // external components and constants
 import { ROUTES } from "./Routes";
@@ -19,20 +20,15 @@ import Notification from "./Models/Notification";
 // style imports
 import "./App.css";
 
+const cable = ActionCable.createConsumer(`${webSocketUrl}`);
+
 const App: React.FunctionComponent = () => {
   const dispatch = useDispatch();
 
   const currentUserId: string = localStorage.getItem("currentUserId") || "";
 
   const [notify, setNotify] = useState<boolean>(false);
-  const [notificationMessageDetails, setNotificationMessageDetails] =
-    useState<Notification | null>(null);
-
-  useEffect(() => {
-    if (notify) {
-      setTimeout(() => setNotify(false), 2000);
-    }
-  }, [notify]);
+  const [notificationMessageDetails, setNotificationMessageDetails] = useState<Notification | null>(null);
 
   const handleReceivedConversation = (payload: any) => {
     if (Number(payload.sender_id) != Number(JSON.parse(currentUserId))) {
@@ -42,28 +38,32 @@ const App: React.FunctionComponent = () => {
     }
   };
 
+  useEffect(() => {
+    cable.subscriptions.create(
+      { channel: "NotificationsChannel" },
+      {
+        received: handleReceivedConversation,
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    if (notify) {
+      setTimeout(() => setNotify(false), 2000);
+    }
+  }, [notify]);
+
   return (
     <>
-      <ActionCable
-        channel={{ channel: "NotificationsChannel" }}
-        onReceived={handleReceivedConversation}
-      >
-        <div className="App">
-          <PositionedSnackbar
-            notify={notify}
-            notificationMessageDetails={notificationMessageDetails}
-          />
-        </div>
-      </ActionCable>
+      <div className="App">
+        <PositionedSnackbar notify={notify} notificationMessageDetails={notificationMessageDetails} />
+      </div>
       <Switch>
         <Redirect exact from={"/"} to={ROUTES.HOME} />
         <Route component={Home} path={ROUTES.HOME} />
         <Route exact component={Conversations} path={ROUTES.CONVERSATIONS} />
         <Route component={ChatBox} path={ROUTES.CHAT_BOX} />
-        <Route
-          component={CreateNewConversation}
-          path={ROUTES.CREATE_NEW_CONVERSATION}
-        />
+        <Route component={CreateNewConversation} path={ROUTES.CREATE_NEW_CONVERSATION} />
       </Switch>
       <GoBack />
     </>
